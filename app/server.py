@@ -8,10 +8,24 @@ from io import BytesIO
 from fastai import *
 from fastai.vision import *
 
-model_file_url = 'https://www.dropbox.com/s/y4kl2gv1akv7y4i/stage-2.pth?raw=1'
+# original example model_file_url
+# model_file_url = 'https://www.dropbox.com/s/y4kl2gv1akv7y4i/stage-2.pth?raw=1'
+model_file_url = 'https://www.dropbox.com/s/e6onohhrvq7mt3g/pet-prophet-stage2.pth?dl=1'
 model_file_name = 'model'
 
-classes = ['black', 'grizzly', 'teddys']
+classes = ['leonberger','pomeranian', 'Bombay', 'yorkshire_terrier', 
+           'basset_hound', 'Sphynx', 'newfoundland', 'english_cocker_spaniel',
+           'beagle', 'english_setter', 'american_pit_bull_terrier',
+           'wheaten_terrier', 'staffordshire_bull_terrier', 'scottish_terrier',
+           'Russian_Blue', 'Egyptian_Mau', 'Maine_Coon', 'Bengal', 'Siamese',
+           'chihuahua', 'great_pyrenees', 'Ragdoll', 'boxer',
+           'german_shorthaired', 'japanese_chin', 'american_bulldog', 
+           'British_Shorthair', 'Persian', 'shiba_inu', 'Birman', 'keeshond',
+           'miniature_pinscher', 'saint_bernard', 'Abyssinian', 'samoyed',
+           'havanese', 'pug']
+
+# original example classes
+# classes = ['black', 'grizzly', 'teddys']
 path = Path(__file__).parent
 
 app = Starlette()
@@ -28,8 +42,8 @@ async def download_file(url, dest):
 async def setup_learner():
     await download_file(model_file_url, path/'models'/f'{model_file_name}.pth')
     data_bunch = ImageDataBunch.single_from_classes(path, classes,
-        tfms=get_transforms(), size=224).normalize(imagenet_stats)
-    learn = create_cnn(data_bunch, models.resnet34, pretrained=False)
+        tfms=get_transforms(), size=224)#.normalize(imagenet_stats)
+    learn = create_cnn(data_bunch, models.resnet34)#, pretrained=False)
     learn.load(model_file_name)
     return learn
 

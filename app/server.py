@@ -12,8 +12,6 @@ from fastai.vision import *
 # model_file_url = 'https://www.dropbox.com/s/y4kl2gv1akv7y4i/stage-2.pth?raw=1'
 model_file_url = 'https://www.dropbox.com/s/e6onohhrvq7mt3g/pet-prophet-stage2.pth?dl=1'
 model_file_name = 'model'
-TORCH_MODEL_ZOO = '/tmp'
-TORCH_HOME = '/tmp'
 
 classes = ['leonberger','pomeranian', 'Bombay', 'yorkshire_terrier', 
            'basset_hound', 'Sphynx', 'newfoundland', 'english_cocker_spaniel',
